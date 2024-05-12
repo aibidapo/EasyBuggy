@@ -186,59 +186,31 @@
 			                    </suppressionFiles> 
 			                 -->
    </configuration>
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-antrun-plugin</artifactId>
+    <executions>
+        <execution>
+            <id>create-empty-directory-and-english-properties</id>
+            <phase>process-classes</phase>
+            <goals>
+                <goal>run</goal>
+            </goals>
+            <configuration>
+                <target>
+                    <mkdir dir="logs" />
+                    <copy file="${basedir}/src/main/resources/messages_en.properties"
+                        tofile="${project.build.outputDirectory}/messages.properties" />
+                    <copy file="${basedir}/src/main/resources/indexpage_en.properties"
+                        tofile="${project.build.outputDirectory}/indexpage.properties" />
+                    <delete
+                        file="${project.build.outputDirectory}/org/t246osslab/easybuggy/core/utils/DeleteClassWhileMavenBuild.class" />
+                </target>
+            </configuration>
+        </execution>
+    </executions>
 </plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>create-empty-directory-and-english-properties</id>
-						<phase>process-classes</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<tasks>
-								<mkdir dir="logs" />
-								<copy file="${basedir}/src/main/resources/messages_en.properties"
-									tofile="${project.build.outputDirectory}/messages.properties" />
-								<copy file="${basedir}/src/main/resources/indexpage_en.properties"
-									tofile="${project.build.outputDirectory}/indexpage.properties" />
-								<delete
-									file="${project.build.outputDirectory}/org/t246osslab/easybuggy/core/utils/DeleteClassWhileMavenBuild.class" />
-							</tasks>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>3.3.1</version>
-				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<warName>ROOT</warName>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.1</version>
-				<executions>
-					<execution>
-						<id>tomcat-run</id>
-						<goals>
-							<goal>exec-war-only</goal>
-						</goals>
-						<phase>package</phase>
-						<configuration>
-							<path>/</path>
-							<enableNaming>true</enableNaming>
-							<finalName>easybuggy.jar</finalName>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
+
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.2</version>

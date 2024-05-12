@@ -16,7 +16,7 @@ environment {
         }
     stage('CompileandRunSonarAnalysis') {
             steps {	
-		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=ai-easybuggy -Dsonar.organization=ai-easybuggy -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=7ed004983bf02fccd1a14fd9e525be07f784d292'
+		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=ai-easybuggy -Dsonar.organization=ai-easybuggy -Dsonar.host.url=https://sonarcloud.io'
 			}
         } 
   }
